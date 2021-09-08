@@ -30,9 +30,10 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
     }
+
     public static boolean checkTodo(String userCommand) {
         boolean isInvalidTodo = true;
-        if(userCommand.length() <= 5) {
+        if (userCommand.length() <= 5) {
             return isInvalidTodo;
         } else {
             return !isInvalidTodo;
@@ -41,7 +42,7 @@ public class Duke {
 
     public static boolean checkDeadline(String userCommand) {
         boolean isInvalidDeadline = true;
-        if(userCommand.length() <= 9) {
+        if (userCommand.length() <= 9) {
             return isInvalidDeadline;
         } else {
             return !isInvalidDeadline;
@@ -50,7 +51,7 @@ public class Duke {
 
     public static boolean checkEvent(String userCommand) {
         boolean isInvalidEvent = true;
-        if(userCommand.length() <= 6) {
+        if (userCommand.length() <= 6) {
             return isInvalidEvent;
         } else {
             return !isInvalidEvent;
@@ -74,44 +75,49 @@ public class Duke {
                 userCommand = userInput.nextLine();
                 continue;
             } else if (userCommand.contains("todo")) {
-                if(checkTodo(userCommand)) {
+                if (checkTodo(userCommand)) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     System.out.println(line);
                     userCommand = userInput.nextLine();
                     continue;
+                } else {
+                    inputCount = printTodo(arrayInput, userCommand, inputCount);
+                    taskType[inputCount - 1] = "T";
+                    userCommand = userInput.nextLine();
+                    continue;
                 }
-                inputCount = printTodo(arrayInput, userCommand, inputCount);
-                taskType[inputCount - 1] = "T";
-                userCommand = userInput.nextLine();
-                continue;
+
             } else if (userCommand.contains("deadline")) {
-                if(checkDeadline(userCommand)) {
+                if (checkDeadline(userCommand)) {
                     System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println(line);
                     userCommand = userInput.nextLine();
                     continue;
+                } else {
+                    inputCount = printDeadline(arrayInput, userCommand, inputCount);
+                    taskType[inputCount - 1] = "D";
+                    userCommand = userInput.nextLine();
+                    continue;
                 }
-                inputCount = printDeadline(arrayInput, userCommand, inputCount);
-                taskType[inputCount - 1] = "D";
-                userCommand = userInput.nextLine();
-                continue;
+
             } else if (userCommand.contains("event")) {
-                if(checkEvent(userCommand)) {
+                if (checkEvent(userCommand)) {
                     System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                     System.out.println(line);
                     userCommand = userInput.nextLine();
                     continue;
+                } else {
+                    inputCount = printEvent(arrayInput, userCommand, inputCount);
+                    taskType[inputCount - 1] = "E";
+                    userCommand = userInput.nextLine();
+                    continue;
                 }
-                inputCount = printEvent(arrayInput, userCommand, inputCount);
-                taskType[inputCount - 1] = "E";
-                userCommand = userInput.nextLine();
-                continue;
-            } else if(!userCommand.equals("bye")) {
+
+            } else if (!userCommand.equals("bye")) {
                 printInvalid();
                 System.out.println(line);
                 userCommand = userInput.nextLine();
                 continue;
-
             }
             inputCount = printUpdate(arrayInput, userCommand, inputCount);
             userCommand = userInput.nextLine();
